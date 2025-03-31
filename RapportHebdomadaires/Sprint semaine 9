@@ -1,0 +1,7 @@
+Ce que nous avons fait : 
+Christophe : Correction Probleme de placements des ville en fonction de la taille des ecrans ,ajout d'une distance entre les villes et leur rectangle ,
+Ajout image wagon et premier version pose wagon,Conceptualisation algorithme de generation
+Arthur : piocheObjectif effective, ajout des objectids dans l'inventaire, mise a jour de l'inventaire et de la pioche 
+Ce que nous allons faire :
+Christophe : Finir l'affichage des wagon proprement , Finir si possible l'algorithme de generation
+Arthur : Selection des avatars en meme temps que les pseudos, ajouter un indicateur du joueur courant (et de tous les autres)

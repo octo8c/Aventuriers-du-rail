@@ -1,0 +1,15 @@
+Ce que nous avons fait semaine 2 -> 3 : 
+Arthur : Ecran de presentation
+Nous avions demandé les semaines précedentes si nous pouvions utiliser la librairie awt en plus de swing pour notre projet.
+L'enseignante nous avait alors dit qu'il fallait utiliser uniquement swing.
+Leo : Correction d'un bug sur les cartes objectif et creation des 2 pioches 
+Christophe : Creation de la classe Joueur,Ajout du plateau et de toutes les methodes
+pour permettre l'interaction entre le plateau et la pioche ,fonction qui calcule le score de chaque joueur a la fin de la partie ,ajout de l'algorithme pour trouver le chemin le plus long 
+mais également ajout d'une methode jeu qui fait tourner une boucle de jeu qui fait tourner le jeu jusqu'a la fin.
+Mellisandre : Rien encore a l'hopital malheuresement
+
+Ce que nous avons prevu de faire 3 -> 4 :
+Arthur : finir l'ecran de presentation avec ou sans awt suivant la réponse de l'enseignante.
+Christophe : Faire les gares , les double lignes ,tunnel et lignes,corriges des soucis d'implementation.
+Leo : Finir tout le travail des pioche et faire l'ecran de presentations des pioche avec la possibilites de donner les cartes au joueur
+Melissandre : Encore a l'hopital donc rien

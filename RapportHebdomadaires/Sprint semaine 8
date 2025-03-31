@@ -1,0 +1,9 @@
+Ce que nous avon fait
+Christophe : Ajouter les images de gare, refaire les couleurs pour avoir des couleurs prédéfinis avec chaque joueur, 
+lecture de fichier améliorer pour pouvoir lire les double ligne les tunnel ainsi que le nombre de case locomotives, 
+*ajout bouton passe tour pour pouvoir quand même regardé ces cartes même si on a joué, ajout des lignes pour les gares à la fin de la partie 0lutot que pendant, 
+création fichier objectif avec tt les cartes objectif.
+Arthur : Reprise à 0 de l'écran pioche et du contenu des pioche pour tt refaire et finir. 
+Ce que nous allons faire :
+Christopĥe : Creation de fichier generateur ,Ajout affichage wagon quand on pose une ligne
+Arthur : Ameliorer l'affichage et faire la pioche carteObjectif 

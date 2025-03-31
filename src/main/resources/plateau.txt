@@ -1,0 +1,154 @@
+1850 1016
+Paris 533 450
+Londres 500 290
+Bruxelles 580 360
+Brest 370 400
+Dieppe 445 390
+Amsterdam 612 304
+Barcelone 530 725
+Pampelune 390 675
+Lisbonne 122 815
+Cadix 200 900
+Marseille 645 650
+Rome 930 750
+Budapest 1300 485
+Zurich 750 610
+Palerme 1000 940
+Brindisi 1050 785
+Venise 910 620
+Stockholm 1070 70
+Munich 800 500
+Francfort 720 400
+Essen 770 320
+Berlin 870 370
+Vienne 1100 500
+Athènes 1370 870
+Zagreb 1030 600
+Copenhague 945 135
+Sarajevo 1250 750
+Sofia 1385 610
+Constantinople 1630 750
+Ankara 1750 880
+Smyrne 1600 910
+Erzurum 1800 670
+Sotchi 1810 500
+Rostov 1800 400
+Kharkiv 1700 365
+Moscou 1780 250
+Saint-Pétersbourg 1700 50
+Édimbourg 480 60
+Dantzig 1080 220
+Kiev 1620 420
+Riga 1270 150
+Varsovie 1250 400
+Sébastopol 1710 519
+Bucarest 1550 520
+Madrid 285 780
+Vilnius 1420 310
+Smolensk 1570 325
+###############
+Paris Brest 3 JOKER false false 0
+Paris Dieppe 1 RED false false 0
+Paris Pampelune 4 BLUE false true 0
+Paris Pampelune 4 GREEN false true 0
+Paris Marseille 4 ORANGE false false 0
+Paris Zurich 3 JOKER true false 0
+Paris Francfort 3 WHITE false true 0
+Paris Francfort 3 ORANGE false true 0
+Paris Bruxelles 2 YELLOW false true 0
+Paris Bruxelles 2 RED false true 0
+Londres Amsterdam 1 JOKER false false 2
+Londres Dieppe 2 JOKER false true 1
+Londres Dieppe 2 JOKER false true 1
+Londres Édimbourg 4 YELLOW false true 0
+Londres Édimbourg 4 PURPLE false true 0
+Bruxelles Dieppe 2 GREEN false false 0
+Bruxelles Francfort 2 BLUE false false 0
+Bruxelles Amsterdam 1 PURPLE false false 0
+Amsterdam Francfort 2 BLUE false false 0
+Brest Pampelune 4 PURPLE false false 0
+Pampelune Madrid 3 BLACK true true 0
+Pampelune Madrid 3 WHITE true true 0
+Pampelune Marseille 4 ROUGE false false 0
+Barcelone Madrid 2 YELLOW false false 0
+Madrid Cadix 3 ORANGE false false 0
+Cadix Lisbonne 2 BLUE false false 0
+Lisbonne Madrid 2 BLACK false false 0
+Marseille Rome 4 PURPLE true false 0
+Marseille Zurich 3 PURPLE true false 0
+Marseille Barcelone 4 JOKER false false 0
+Barcelone Pampelune 2 JOKER true false 0
+Vienne Budapest 2 ROUGE false true 0
+Vienne Budapest 2 WHITE false true 0
+Zagreb Sarajevo 3 YELLOW false false 0
+Zagreb Budapest 2 ORANGE false false 0
+Zagreb Vienne 2 JOKER false false 0
+Zagreb Venise 2 JOKER false false 0
+Bucarest Sébastopol 4 WHITE false false 0
+Sébastopol Constantinople 4 JOKER false false 2
+Brindisi Athènes 3 JOKER false false 1
+Brindisi Palerme 3 JOKER false false 1
+Rome Palerme 4 JOKER false false 1
+Smyrne Palerme 3 JOKER false false 2
+Smyrne Ankara 3 ORANGE true false 0
+Smyrne Athènes 2 JOKER false false 1
+Smyrne Constantinople 2 JOKER true false 0
+Constantinople Ankara 2 JOKER true false 0
+Constantinople Bucarest 3 YELLOW false false 0
+Constantinople Sofia 3 BLUE false false 0
+Sofia Bucarest 2 BLACK true false 0
+Sofia Sarajevo 2 BLACK true false 0
+Dantzig Riga 3 BLACK false false 0
+Sarajevo Athènes 4 GREEN false false 0
+Sarajevo Budapest 3 PURPLE false false 0
+Rome Brindisi 2 WHITE false false 0
+Zurich Venise 2 GREEN true false 0
+Zurich Munich 2 GREEN true false 0
+Rome Venise 2 PURPLE false false 0
+Vienne Munich 3 ORANGE false false 0
+Munich Venise 2 BLUE true false 0
+Munich Francfort 2 PURPLE false false 0
+Francfort Essen 2 GREEN false false 0
+Francfort Berlin 3 RED false true 0
+Francfort Berlin 3 WHITE false true 0
+Berlin Varsovie 3 PURPLE false true 0
+Berlin Varsovie 3 YELLOW false true 0
+Berlin Vienne 3 GREEN false false 0
+Berlin Dantzig 4 JOKER false false 0
+Dantzig Varsovie 2 JOKER false false 0
+Stockholm Copenhague 3 WHITE false true 0
+Stockholm Copenhague 3 YELLOW false true 0
+Stockholm Saint-Pétersbourg 8 JOKER true false 0
+Saint-Pétersbourg Moscou 4 WHITE false false 0
+Berlin Essen 2 BLUE false false 0
+Amsterdam Essen 2 YELLOW false false 0
+Budapest Kiev 5 JOKER true false 0
+Bucarest Kiev 4 JOKER false false 0
+Essen Copenhague 3 JOKER false true 1
+Essen Copenhague 3 JOKER false true 1
+Riga Saint-Pétersbourg 4 JOKER false false 0
+Vienne Varsovie 4 BLUE false false 0
+Riga Vilnius 4 GREEN false false 0
+Vilnius Kiev 2 JOKER false false 0
+Vilnius Smolensk 2 YELLOW false false 0
+Vilnius Saint-Pétersbourg 4 BLUE false false 0
+Vilnius Varsovie 3 RED false false 0
+Moscou Kharkiv 4 JOKER false false 0
+Moscou Smolensk 2 ORANGE false false 0
+Bucarest Budapest 4 JOKER true false 0
+Kiev Smolensk 3 RED false false 0
+Pampelune Brest 4 PURPLE false false 0
+Varsovie Kiev 4 JOKER false false 0
+Athènes Sofia 3 PURPLE false false 0
+Sébastopol Erzurum 4 JOKER false false 2
+Sébastopol Sotchi 1 JOKER false false 1
+Sébastopol Rostov 4 JOKER false false 0
+Sotchi Rostov 1 JOKER false false 0
+Sotchi Erzurum 3 RED true false 0
+Erzurum Ankara 3 BLACK false false 0
+Rostov Kharkiv 2 GREEN false false 0
+Kharkiv Kiev 2 JOKER false false 0
+
+
+
+

@@ -1,0 +1,9 @@
+Christophe : Ajout du online avec un fichier serveur ainsi qu'un serveur client,Modification du code de l'interface pour permettre de lancer une partie online , 
+Ajout d'une interface d'attente pour le serveur qui indique le nombre de joueur l'adresse ip ainsi que le port , creation de tout les fichiers necessaire pour la creation de map aleatoire ,
+encore besoin de corriger un bug qui fait ce superposer des lignes , ajout d'un gitignore , modification du code pour que les cartes wagon utilises par les joueurs reparte dans la pioche
+Arthur : 
+
+
+Ce que nous allons faire :
+Christophe : Enfin finir l'affichage des wagon sur les lignes ameliorer l'online pour que celui si marche dans tout les cas , correction des bug sur le generation de map et ajout des sauvegardes
+Arthur : 

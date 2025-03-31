@@ -1,0 +1,40 @@
+Voici les differents choix d'implementation et pourquoi on a choisi de les faire comme ca : 
+
+Graph : On a choisi de representer le graph par une classe Ville et une classe Ligne .La classe Ville represente les noeud d'un graphe ,
+tandis que les lignes represente les arrete d'un graph.
+Chaque ville contient un tableau de toutes les lignes qui passent par elle.
+Les lignes quand a elle possedent les 2 ville quelle relie ,leur couleur ,le joueuer qui les possede si il y en a 1,ainsi que leur nombre de cases ainsi qu'une methode qui a partir d'une ville renvoie l'autre ville.
+Avec ce systeme on peut parcourir le graphe sans probleme,avoir facilement acces au informations qu'on a besoin pour tout les calculs de chemin en temps constant sans avoir besoin de donne externe au graphe.
+
+
+EcranPioche : Je voulais piocher 4 cartes pour les afficher par la suite mais je vais plutot piocher 4 cartes dans une autre classe et les stocker dans un tableau pour les afficher.
+
+
+Interface graphique : Pour representer le plateau du jeu nous avons choisi de faire plusieurs ecran de jeu representant les ecran de pioche et d'inventaire pour que le joueur puisse comprendre au mieux le jeu
+Pour ce faire nous avons decide de mettre un cardLayout permettant de changer le panel affiche dans un frame plustot que de lancer une nouvelle frame a chaque fois pour gagner des ressources en memoire et avoir un changement plu rapide
+
+Sauvegarde : 
+Les sauvegardes sont charges dans un fichier saveDispo dans les ressources qui indique au jeu dans quel fichier le joueur peut sauvegarde sous la forme de 5 boolean ,
+le premier boolean dis alors si la sauvegarde 1 est disponible pour sauvegarder dedans ou si le joueur a deja sauvegarde dedans le but de tout ca est d'evité que le joueur reecive sur des sauvegardes qui lui tiennent a coeur.
+
+Il peut cependant supprimer les sauvegardes qu'il souhaite grace au bouton sauvegarde dans le menu qui lui propose toutes ces sauvegardes.
+
+Internet : 
+Serveur : Le serveur fonctionne de sorte a ce qu'un pc doivent lancer le jeu en mode creation de partie , 
+l'utilsaiteur devra alors selectionner le nombre de joueur dans la partie ainsi que le port sur lequel il veut envoyer les requete.
+Le serveur alors attend que tout les client des joueur se connecte avant de lancer la partie.
+Popur chaque connexion accepte il creer un nouveau connectionHandler 
+L'utilsateur doit alors choisir quelle mode de jeu il souhait sur le pc hebergant le serveur.
+Il vas alors recuperer le pseudonyme de chaque joueur puis envoye a tout les clients le mode de jeu selectione avec le plateau.
+Il envera egalement a tout les joueur un signal pour leur permettre de jouer si ces leur tour.
+Il a attendre alors a chaque fois le nouveau plateau apres le coup du joueur ,mettra a jour le plateau du serveur , l'enverra a tout les autre et permettra au prochain joueur de jouer dans la liste.
+
+ConnectionHandler : Chaque connection Handler sers a receptionner tout les packets envouyé par les client des utilisateur et il les stocke jusqu'a que le serveur vienne voir ce qui a été envoye par le joueur,
+chaque connectionHandler est lance sur son propre thread l'interet est de ne pas bloquer le serveur sur un connectionHandler et de facilier la gestion des deconnexion ainsi si le joueur se deconnecte le connectionHandler
+recoit un signal qui lui en avertie afin de se deconnecter et se retire du serveur pour que le serveur ne passe plu de temps a regarder ce qu ' il  se passe.Ca nous permets egalement une gestion indivualisé ainsi on ppourrait assez facilement ajoutez des fonctionnalité
+comme un anti triche .
+
+Client : Le client est creer a chaque fois qu'un joueur vas jouer en ligne celui si sera lance dans un autre thread et il s'occupera d'envoyer et de recepetionner toutes les donnees du joueur ,
+Celui ci enverra le nouveau plateau au connectionHandler qui le gere quand le joueur a jouer un coup.POur la reception des informations il est lance sur un autre thread pour eviter de blocker le systeme.
+
+

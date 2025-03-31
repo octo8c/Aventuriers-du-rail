@@ -1,0 +1,13 @@
+Ce que nous avons fait :
+Christophe : La decoupe des lignes en rectangle pour representer le nombre de wagon,Ajout d'un compteur de tour affiche et que le jeu s'arrete au bout de 45 tour quand le joeur joue tout seul,
+Ajout d'un timer pour montre le temps qui ces ecoule quand le jeu depuis que le jeu c'est lancé,Ajout de la possibilité d'utiliser les cartes locomotives pour acheter les lignes,
+Ajout des tunnel avec l'affichage des 3 cartes pour que le joueur comprenne bien ce qu'il se passe.Ajout du changement de couleur des lignes quand un joueur les a achetes
+(temporaire en attendant de voir si on ajoute les wagon sur les lignes) et du changement de couleur des ville pour representer qu'un joueur a achetes une gare.
+Leo : Continuer l'ecran inventaire manque juste la correction de certain bug
+Arthur : Finis l'ecran inventaire changement d'implementation ou a la place de lancer une nouvelle fenetre cela est fait via un cardLayout
+
+Ce que nous allons faire : 
+Christophe : Ajouter la possibilite de taper son pseudo et de joueur a plusieurs,
+Ajouter la correction des coordonnes en fonction de la taille de l'ecran ,ajouter le clique direct sur les ville a la place d'un bouton et plus si le temps
+Arhtur :
+Leo :
