@@ -1,5 +1,7 @@
 # Aventuriers du Rail
 
+Pour voir le fichier de cryptage : src/java/chiffrement 
+
 Pour jouer : cloner le projet & exécuter cette commande : 
 - `java -jar Ticket-to-Ride.jar`
 
