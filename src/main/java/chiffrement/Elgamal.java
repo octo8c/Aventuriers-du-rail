@@ -23,9 +23,7 @@ public final class Elgamal {
      * L'adaptation est base sur cette implementation
      * https://en.wikipedia.org/wiki/ElGamal_signature_scheme
      * Les parametre comme le nombre de bits de la cle ou meme le nombre de
-     * verification
-     * sur la primalité de la clé sont plus bas que les normes recommendes pour des
-     * raisons d'optimisation
+     * verification sont a peu pres au standards recommendé
      * Pour utiliser des systemes de cryptographique plus sur, il faut mieux se basé
      * sur le package java.security
      * 
@@ -46,7 +44,7 @@ public final class Elgamal {
     /**
      * Le nombre de bits maximum de l'entier
      */
-    private static final int NMB_BITS = 1024;
+    private static final int NMB_BITS = 512;
     /**
      * PublicKey du chiffrement
      */
@@ -211,11 +209,13 @@ public final class Elgamal {
 
     private static boolean test_miller_rabin(BigInteger n, int nmbTest, SecureRandom random) {
         /* Test triviaux pour optimiser certaines etapes */
-
         if (n.compareTo(BigInteger.TWO) == 0
-        ||n.mod(BigInteger.ONE.add(BigInteger.TWO)).compareTo(BigInteger.ZERO)==0) {
+        ||n.compareTo(BigInteger.valueOf(3))==0) {//2 ou 3 sont directement traites pour eviter les cas faux 
             return true;
-        } else if (n.mod(BigInteger.TWO).compareTo(BigInteger.ZERO) == 0 || n.compareTo(BigInteger.TWO) < 0) {
+        } else if (n.mod(BigInteger.TWO).compareTo(BigInteger.ZERO) == 0 //Tout les multiples de 2 et 3 sont egalement evites 
+        || n.compareTo(BigInteger.TWO) < 0|| n.mod(BigInteger.valueOf(3)).compareTo(BigInteger.ZERO)==0
+        || n.mod(BigInteger.valueOf(5)).compareTo(BigInteger.ZERO)==0
+        || n.mod(BigInteger.valueOf(7)).compareTo(BigInteger.ZERO)==0) {
             return false;
         }
         /* Calcul s et d */
@@ -229,7 +229,7 @@ public final class Elgamal {
 
         BigInteger x;
         BigInteger a;
-        BigInteger substractThree = n.subtract(BigInteger.TWO.add(BigInteger.ONE));
+        BigInteger substractThree = n.subtract(BigInteger.valueOf(3));
         for (int i = 0; i < nmbTest; i++) {
             /*
              * A chaque fois qu'il y'a continuer cela veut dire c'est que a n'etait pas un
@@ -261,11 +261,12 @@ public final class Elgamal {
     }
 
     public static void main(String[] args) {
-         System.out.println(generate_sophie_germain_number(64, new SecureRandom()));
-        /*
+         System.out.println(generate_sophie_germain_number(25, new SecureRandom()));
+        
         for (int i = 0; i < 100; i++) {
+            System.out.println("Je rentre dans la boucle");
             String str = "JE suis un message crypte" + i;
-            Elgamal elgamal = new Elgamal(32);
+            Elgamal elgamal = new Elgamal(25);
             System.out.println("Fin de la creation de l'objet");
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream oos;
@@ -281,7 +282,7 @@ public final class Elgamal {
             elgamal.listPublicKeys.add(elgamal.publicKey);
             String messageDecrypte = (String) elgamal.decrypt(cm, 0);
             System.out.println(messageDecrypte);
-        }*/
+        }
     }
         
 }
