@@ -6,25 +6,40 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 public final class Elgamal {
 
-    /* (Le reste du code a été du jeu aventuriers du rail a été fait avant l'apprentisage de mécanisme comme les mutex
+    /*
+     * (Le reste du code a été du jeu aventuriers du rail a été fait avant
+     * l'apprentisage de mécanisme comme les mutex
      * il n'est donc pas otpimises a certain moment)
      *
-     * Cette classe est un ajout suplémentaire à un projet effectué pendant le 2ème semestre de 2ème année de licence :
-     * une adaptation du jeu de société les aventuriers-du-rail avec un mode internet 
-     * Le choix du systeme cryptographique d'Elgamal a été fait pour ca facilité mais également sa sécurité
-     * L'adaptation est base sur cette implementation https://en.wikipedia.org/wiki/ElGamal_signature_scheme
-     * Les parametre comme le nombre de bits de la cle ou meme le nombre de verification  
-     * sur la primalité de la clé sont plus bas que les normes recommendes pour des raisons d'optimisation
-     * Pour utiliser des systemes de cryptographique plus sur, il faut mieux se basé sur le package java.security
+     * Cette classe est un ajout suplémentaire à un projet effectué pendant le 2ème
+     * semestre de 2ème année de licence :
+     * une adaptation du jeu de société les aventuriers-du-rail avec un mode
+     * internet
+     * Le choix du systeme cryptographique d'Elgamal a été fait pour ca facilité
+     * mais également sa sécurité
+     * L'adaptation est base sur cette implementation
+     * https://en.wikipedia.org/wiki/ElGamal_signature_scheme
+     * Les parametre comme le nombre de bits de la cle ou meme le nombre de
+     * verification
+     * sur la primalité de la clé sont plus bas que les normes recommendes pour des
+     * raisons d'optimisation
+     * Pour utiliser des systemes de cryptographique plus sur, il faut mieux se basé
+     * sur le package java.security
      * 
-     * Les contraintes pour cette classe sont de ne s'appuyer sur aucun algorithme déja fait 
-     * le seul package utilisé est BigInteger pour faciliter la manipulation de grands entier
-     * (!!!La fonction de haching n'est pas a utilisés et devrait etre refaite complement !!!)
+     * Les contraintes pour cette classe sont de ne s'appuyer sur aucun algorithme
+     * déja fait
+     * le seul package utilisé est BigInteger pour faciliter la manipulation de
+     * grands entier
+     * (!!!La fonction de haching n'est pas a utilisés et devrait etre refaite
+     * complement !!!)
      * 
-     * Les anciens commit ne sont pas affichés car le serveur ou le projet était hebergé a fermé.
-     * Des optimisation non ajoutés serait par exemple du paralelisme sur le calcul de certaines cle, 
+     * Les anciens commit ne sont pas affichés car le serveur ou le projet était
+     * hebergé a fermé.
+     * Des optimisation non ajoutés serait par exemple du paralelisme sur le calcul
+     * de certaines cle,
      * ou meme une fonction de hashage plus poussé comme SHA256
      */
 
@@ -51,7 +66,6 @@ public final class Elgamal {
      * @param n le parametre de sécurité
      */
     private SecureRandom secureRandom;
-    
 
     public Elgamal(int n) {
         secureRandom = new SecureRandom();
@@ -128,7 +142,8 @@ public final class Elgamal {
         BigInteger message = cryptedMessage.c().multiply(s.modInverse(publicKey.p())).mod(publicKey.p());
         Object obj = null;
         byte[] bytes = message.toByteArray();
-        if (bytes.length > 0 && bytes[0] == 0) {// Pour eviter le padding
+        if (bytes.length > 0 && bytes[0] == 0) {// Pour eviter le padding (Technique ne marchant que pour entier de 1024
+                                                // bits)
             bytes = Arrays.copyOfRange(bytes, 1, bytes.length);
         }
         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
@@ -187,45 +202,71 @@ public final class Elgamal {
     private static BigInteger generate_sophie_germain_number(int nmb_test, SecureRandom rand) {
         BigInteger integer = new BigInteger(NMB_BITS, rand);
         /* On test si le nombre genere est un nombre premier de sophie germain */
-        while (test_miller_rabin(integer, nmb_test, rand)
-                && test_miller_rabin(integer.multiply(BigInteger.TWO).add(BigInteger.ONE), nmb_test, rand)) {
+        while (!test_miller_rabin(integer, nmb_test, rand)
+                || !test_miller_rabin(integer.multiply(BigInteger.TWO).add(BigInteger.ONE), nmb_test, rand)) {
             integer = new BigInteger(NMB_BITS, rand);
         }
-
         return integer;
     }
 
-    private static boolean test_miller_rabin(BigInteger big, int nmbTest, SecureRandom random) {
+    private static boolean test_miller_rabin(BigInteger n, int nmbTest, SecureRandom random) {
+        /* Test triviaux pour optimiser certaines etapes */
+
+        if (n.compareTo(BigInteger.TWO) == 0
+        ||n.mod(BigInteger.ONE.add(BigInteger.TWO)).compareTo(BigInteger.ZERO)==0) {
+            return true;
+        } else if (n.mod(BigInteger.TWO).compareTo(BigInteger.ZERO) == 0 || n.compareTo(BigInteger.TWO) < 0) {
+            return false;
+        }
         /* Calcul s et d */
-        BigInteger subBigInteger = big.subtract(BigInteger.ONE);
+        BigInteger subBigInteger = n.subtract(BigInteger.ONE);
         BigInteger d = subBigInteger;
-        int s = 1;
+        int s = 0;
         while (d.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
             d = d.divide(BigInteger.TWO);
             s++;
         }
+
         BigInteger x;
+        BigInteger a;
+        BigInteger substractThree = n.subtract(BigInteger.TWO.add(BigInteger.ONE));
         for (int i = 0; i < nmbTest; i++) {
-            BigInteger a = new BigInteger(NMB_BITS, random);
-            x = a.modPow(d, big);
+            /*
+             * A chaque fois qu'il y'a continuer cela veut dire c'est que a n'etait pas un
+             * temoin de big
+             */
+            a = new BigInteger(NMB_BITS, random).mod(substractThree).add(BigInteger.TWO);
+            x = a.modPow(d, n);
             if (x.compareTo(BigInteger.ONE) == 0 || x.compareTo(subBigInteger) == 0) {
-                return false;
+                continue;
             }
-            for (int j = 0; j < s; j++) {
-                x = x.modPow(BigInteger.TWO, big);
+            boolean temoin = false;
+            for (int j = 1; j < s; j++) {
+                x = x.modPow(BigInteger.TWO, n);
                 if (x.compareTo(subBigInteger) == 0) {
+                    temoin = true;
+                    break;
+                }
+
+                if (x.compareTo(BigInteger.ONE) == 0) {
                     return false;
                 }
+            }
+
+            if (!temoin) {// N est compose
+                return false;// Ce n'est donc pas un nombre premier
             }
         }
         return true;
     }
 
     public static void main(String[] args) {
+         System.out.println(generate_sophie_germain_number(64, new SecureRandom()));
+        /*
         for (int i = 0; i < 100; i++) {
-            String str = "JE suis un message crypte"+i;
+            String str = "JE suis un message crypte" + i;
             Elgamal elgamal = new Elgamal(32);
-
+            System.out.println("Fin de la creation de l'objet");
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream oos;
             try {
@@ -240,6 +281,7 @@ public final class Elgamal {
             elgamal.listPublicKeys.add(elgamal.publicKey);
             String messageDecrypte = (String) elgamal.decrypt(cm, 0);
             System.out.println(messageDecrypte);
-        }
+        }*/
     }
+        
 }
