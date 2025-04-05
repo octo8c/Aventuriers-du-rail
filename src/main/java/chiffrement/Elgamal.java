@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 
 public final class Elgamal {
@@ -57,14 +58,18 @@ public final class Elgamal {
      * Liste de toutes les publicKeys en communication
      */
     private ArrayList<PublicKey> listPublicKeys;
+
+    /**
+     * Generateur de nombre aléatoire
+     */
+    private SecureRandom secureRandom;
+
     /**
      * Genere un objet content une cle publique et une cle primaire
      * et mettant en place le chiffrement el gamal
      * 
      * @param n le parametre de sécurité
      */
-    private SecureRandom secureRandom;
-
     public Elgamal(int n) {
         secureRandom = new SecureRandom();
         BigInteger premier_germain = generate_sophie_germain_number(n, this.secureRandom);
@@ -79,7 +84,13 @@ public final class Elgamal {
         listPublicKeys = new ArrayList<PublicKey>();
     }
 
+    /**
+     * Encrypt un objet a envoye
+     * @param object l'objet a encrypte
+     * @return L'objet encrypte
+     */
     public CryptedMessage encrypt(Object object) {
+        /*Pour transformer l'objet en suite de byte a encrypter */
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream oos;
         try {
@@ -117,6 +128,12 @@ public final class Elgamal {
         return new CryptedMessage(bigB, c, r, s);
     }
 
+    /**
+     * Verifie si la signature est bonne
+     * @param cryptedMessage Le message crypte a verifier
+     * @param message Le message decrypter pour verifier qu'on retombe sur les memes valeur 
+     * @return true si le message est bien intact est false sinon
+     */
     public boolean verify(CryptedMessage cryptedMessage, BigInteger message) {
         if (cryptedMessage.r().compareTo(BigInteger.ZERO) <= 0
                 || cryptedMessage.r().compareTo(this.privateKey.p()) >= 0) {
@@ -134,6 +151,11 @@ public final class Elgamal {
         return big.compareTo(reste) == 0;
     }
 
+    /**
+     * @param cryptedMessage le messsage crypte par la cle publique de l'envoyeur
+     * @param ind la cle pub;ique a envoyé
+     * @return Renvoie l'objet qui avait ete encrypte
+     */
     public Object decrypt(CryptedMessage cryptedMessage, int ind) {
         PublicKey publicKey = listPublicKeys.get(ind);
         BigInteger s = cryptedMessage.bigB().modPow(this.privateKey.a(), publicKey.p());
@@ -166,6 +188,11 @@ public final class Elgamal {
         this.listPublicKeys.add(publicKey);
     }
 
+    /**
+     * Fonction de haching
+     * @param big l'entier a hacher
+     * @return Renvoie un entier hacher
+     */
     public static BigInteger hashing(BigInteger big) {
         byte[] tab = big.toByteArray();
         BigInteger hash = BigInteger.ZERO;
@@ -177,10 +204,19 @@ public final class Elgamal {
         return hash;
     }
 
+    /**
+     * @return Renvoie la cle publique 
+     */
     public PublicKey getPublicKey() {
         return publicKey;
     }
 
+    /**
+     * (p et q doivent etre premier pour que ca marche )
+     * @param q Un nombre premier 
+     * @param p Un nombre de sophie germain
+     * @return Renvoie le generateur du groupe q 
+     */
     private static BigInteger generateurModulo(BigInteger q, BigInteger p) {
         BigInteger i = BigInteger.TWO;
         while (i.compareTo(q) <= 0) {
@@ -206,8 +242,14 @@ public final class Elgamal {
         }
         return integer;
     }
-
-    private static boolean test_miller_rabin(BigInteger n, int nmbTest, SecureRandom random) {
+    /**
+     * Test de primalité de miller rabin
+     * @param n Le nombre a teste
+     * @param nmbTest Le nombre de test a effectué
+     * @param random Le generateur de nombre random 
+     * @return Renvoie true si il est probable que le nombre soit un nombre premier et false sinon
+     */
+    private static boolean test_miller_rabin(BigInteger n, int nmbTest, Random random) {
         /* Test triviaux pour optimiser certaines etapes */
         if (n.compareTo(BigInteger.TWO) == 0
         ||n.compareTo(BigInteger.valueOf(3))==0) {//2 ou 3 sont directement traites pour eviter les cas faux 
